@@ -1,24 +1,23 @@
     /* Styling für das Formular */
 
-body {
-    font-family: sans-serif;
-    background: linear-gradient(#141e30, #243b55);
-    position: relative;
-    padding: 10px 30px;
-    color: #d0e3e3;
-    font-size: 10px;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    margin-top: 40px;
-    letter-spacing: 3.5px
-
-}
-
-  input[type="range"] {
-    width: 80%;
-    margin: 20px 0;
-  }
+    body {
+        font-family: sans-serif;
+        background: linear-gradient(#141e30, #243b55);
+        position: relative;
+        padding: 30px;
+        color: #d0e3e3;
+        font-size: 1rem;
+        text-transform: uppercase;
+        overflow: hidden;
+        transition: .5s;
+        margin-top: 40px;
+        letter-spacing: 3.5px;
+        }
+        
+        input[type="range"] {
+        width: 80%;
+        margin: 20px auto;
+        }
 
   button {
     position: relative;
