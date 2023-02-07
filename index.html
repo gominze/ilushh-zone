@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stimmungsindex</title>
+</head>
+<body>
+    <h1>Stimmungsindex</h1>
+    <form id="survey-form">
+        <div class="question">
+          <label for="question1">1. Wie motiviert waren Sie heute morgen?</label>
+          <input type="range" min="1" max="10" value="5" id="question1" class="slider">
+        </div>
+    
+        <div class="question">
+          <label for="question2">2. Wie motiviert sind Sie jetzt für den weiteren Tagesverlauf?</label>
+          <input type="range" min="1" max="10" value="5" id="question2" class="slider">
+        </div>
+    
+        <div class="question">
+          <label for="question3">3. Wie fühlen Sie sich heute insgesamt (auf einer Skala von 1 bis 10)?</label>
+          <input type="range" min="1" max="10" value="5" id="question3" class="slider">
+        </div>
+    
+        <div class="question">
+          <label for="question4">4. Wie gut konnten Sie sich heute konzentrieren?</label>
+          <input type="range" min="1" max="10" value="5" id="question4" class="slider">
+        </div>
+    
+        <div class="question">
+          <label for="question5">5. Wie optimistisch sind Sie, was die Zukunft betrifft?</label>
+          <input type="range" min="1" max="10" value="5" id="question5" class="slider">
+        </div>
+    
+        <button type="submit">Absenden</button>
+      </form>
+      
+      <div class="result-page">
+        <h2 id="result"></h2>
+      </div>
+    
+<div id="result"></div>
+<!-- JS -->
+
+<script src="js/main.js"></script>
+<!-- CSS -->
+
+<link rel="stylesheet" href="css/style.css">
+</body>
+</html>
