@@ -1,5 +1,14 @@
 // Speichern
-const form = document.querySelector("form");
+const form = document.querySelector("#survey-form");
+const sliders = form.querySelectorAll(".slider");
+
+sliders.forEach(slider => {
+  slider.addEventListener("input", function() {
+    const id = this.id;
+    const valueDisplay = document.querySelector(`#${id}-value`);
+    valueDisplay.textContent = this.value;
+  });
+});
 
 // Ergebnis zeigen
 const result = document.querySelector("#result");
@@ -8,8 +17,7 @@ const result = document.querySelector("#result");
 form.addEventListener("submit", event => {
   event.preventDefault();
 
-// Durchschnitt der 5 Fragen
-
+  // Durchschnitt der 5 Fragen
   const question1 = parseInt(document.querySelector("#question1").value, 10);
   const question2 = parseInt(document.querySelector("#question2").value, 10);
   const question3 = parseInt(document.querySelector("#question3").value, 10);
@@ -20,13 +28,3 @@ form.addEventListener("submit", event => {
 
   result.textContent = `Dein aktuelle Stimmungsindex beträgt: ${average}`;
 });
-
-// Überprüfen Sie, ob das Formular abgesendet wurde
-document.querySelector("#mood-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-
-// Berechnen Sie den Stimmungsindex
-    const question1 = parseInt(document.querySelect)
-});
-

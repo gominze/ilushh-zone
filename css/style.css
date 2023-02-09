@@ -1,48 +1,53 @@
-    /* Styling für das Formular */
+/* Styling für das Formular */
 
     h1 {
         text-align: center;
         background: linear-gradient(to right, #ff00ff, #ffff00);
-        /* Farbübergänge */
+/* Farbübergänge */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
     body {
-        font-family: sans-serif;
         background: linear-gradient(#141e30, #243b55);
-        position: relative;
-        padding: 30px;
         color: #d0e3e3;
+        font-family: sans-serif;
         font-size: 1rem;
-        text-transform: uppercase;
-        overflow: hidden;
-        transition: .5s;
-        margin-top: 40px;
         letter-spacing: 3.5px;
+        margin-top: 40px;
+        padding: 30px;
+        position: relative;
+        transition: .5s;
+        display: block;
     }
 
+    /* der Balken */
     input[type="range"] {
         width: 80%;
-        margin: 20px auto;
-    }
-
-    button {
-        position: relative;
-        display: inline-block;
-        padding: 9px 30%;
-        color: #03e9f4;
-        font-size: 16px;
-        text-decoration: none;
-        text-transform: uppercase;
-        overflow: hidden;
-        transition: .5s;
+        margin: 5px;
         margin-top: 30px;
-        letter-spacing: 3px;
-        background: local;
-        border: hidden;
+        
     }
 
+/* Button Senden     */
+
+button {
+    background: local;
+    border: hidden;
+    color: #03e9f4;
+    font-size: 20px; /*Eigenschaft legt die Schriftgröße des Textes*/
+    margin-top: 30px; /* legt den Abstand des Elements zum oberen Rand fest */
+    letter-spacing: 3px;
+    overflow: hidden;
+    transition: .5s;
+    display: block; /*Diese Eigenschaft legt die Art und Weise fest, wie das Element dargestellt wird. Hier ist die Einstellung auf "block" gesetzt, was bedeutet, dass das Element eine eigene 
+    Zeile einnimmt und die gesamte verfügbare Breite ausfüllt.*/
+    width: 160px; /* Breite des Buttons definieren */
+    margin: 0 auto; /* Horizontale Ausrichtung auf dem Bildschirm */
+    text-align: center; /* Text innerhalb des Buttons zentrieren */
+}
+
+/* Button Senden Übergang         */
     button:hover {
         background: #03e9f4;
         color: #fff;
@@ -52,7 +57,7 @@
             0 0 100px #03e9f4;
     }
 
-    /* Styling für die Ergebnisseite */
+/* Styling für die Ergebnisseite */
 
     result-page {
         display: none;
@@ -65,3 +70,15 @@
     result-page h2 {
         margin: 50px 0;
     }
+
+    /* Zahlen unterm Slider*/
+    .question {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      
+      .value {
+        margin-top: 5px;
+      }
