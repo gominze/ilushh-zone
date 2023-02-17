@@ -53,3 +53,23 @@ const average = (question1 + question2 + question3 + question4 + question5) / 5;
     result.innerHTML += `Der durchschnittliche Stimmungsindex aller Teilnehmer beträgt: ${overallAverage}`;
   }
 });
+
+function downloadResults() {
+  const jsonData = JSON.stringify(results);
+  const blob = new Blob([jsonData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'survey_results.json';
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+const downloadButton = document.createElement('button');
+downloadButton.textContent = 'Download Result';
+downloadButton.addEventListener('click', downloadResults);
+
+// fügen Sie die Schaltfläche zur Seite hinzu
+document.body.appendChild(downloadButton);
