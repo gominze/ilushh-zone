@@ -61,7 +61,7 @@ function downloadResults() {
 
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'survey_results.json';
+  a.download = 'stimmung.json';
   a.click();
 
   URL.revokeObjectURL(url);
