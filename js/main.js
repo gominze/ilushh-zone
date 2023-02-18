@@ -89,7 +89,7 @@ Der JSON-String wird in der Variablen jsonData gespeichert.*/
 
 /* erstellt einen Button zum Download */
 const downloadButton = document.createElement('button');
-downloadButton.textContent = 'Download Erdebnis';
+downloadButton.textContent = 'Download Ergebnis';
 downloadButton.addEventListener('click', downloadResults);
 
 // fügen Sie die Schaltfläche zur Seite hinzu
