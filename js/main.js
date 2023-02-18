@@ -54,19 +54,43 @@ const average = (question1 + question2 + question3 + question4 + question5) / 5;
   }
 });
 
+/* --------------erstellt dieser eine Schaltfläche, 
+die es dem Benutzer ermöglicht, eine Datei mit Umfrageergebnissen 
+im JSON-Format herunterzuladen.-----------------*/
+
+
+
 function downloadResults() {
   const jsonData = JSON.stringify(results);
+/*Die Funktion ruft JSON.stringify(results) auf, 
+um die Daten in der Variablen results in einen JSON-String umzuwandeln. 
+Der JSON-String wird in der Variablen jsonData gespeichert.*/
+
+
   const blob = new Blob([jsonData], { type: 'application/json' });
+  /*Dann wird ein neues Blob-Objekt erstellt, indem der JSON-String jsonData als Daten verwendet wird. 
+  Die Option {type: 'application/json'} gibt an, dass es sich bei den Daten im Blob um JSON-Daten handelt. 
+  Das Blob-Objekt wird in der Variablen blob gespeichert.*/
+
   const url = URL.createObjectURL(blob);
+  /*Die Funktion erstellt eine temporäre URL für das Blob-Objekt blob mit der Methode URL.createObjectURL(blob). 
+  URL wird in der Variablen url gespeichert.*/
+
 
   const a = document.createElement('a');
-  a.href = url;
-  a.download = 'survey_results.json';
-  a.click();
+  //neues Element wird erstellt und in a gespeichert.
 
-  URL.revokeObjectURL(url);
+  a.href = url;
+  a.download = 'Ergebnisse.json';
+  a.click();
+  /*Das download-Attribut des a-Elements a wird auf "Ergebnisse.json" 
+  gesetzt, um den Standardnamen der herunterzuladenden Datei anzugeben.*/
+
+  URL.revokeObjectURL(url); // Speicherung freigeben
 }
 
+
+/* erstellt einen Button zum Download */
 const downloadButton = document.createElement('button');
 downloadButton.textContent = 'Download Result';
 downloadButton.addEventListener('click', downloadResults);
