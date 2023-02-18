@@ -40,7 +40,18 @@ const average = (question1 + question2 + question3 + question4 + question5) / 5;
 
 
 // Durchschnittsbewertung jedes Benutzers als Teil der Gesamtbewertungen in einem Ergebnisfeld angezeigt.
-  result.innerHTML += `Teilnehmer ${results.length}: ${average}<br>`;
+const container = document.createElement('div');
+container.className = 'centered'; // um mit CSS arbeiten zu können bezogen auf Teilnehmer
+container.innerHTML = `Teilnehmer ${results.length}: ${average}<br>`;
+
+document.body.appendChild(container);
+
+
+
+
+
+
+
 
 // nach 20 Eingaben werden die Einträge gelöscht
   form.reset();
