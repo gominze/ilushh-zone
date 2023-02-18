@@ -40,7 +40,7 @@ const average = (question1 + question2 + question3 + question4 + question5) / 5;
 
 
 // Durchschnittsbewertung jedes Benutzers als Teil der Gesamtbewertungen in einem Ergebnisfeld angezeigt.
-  result.innerHTML += `Teilnehmer ${results.length}: ${average}<br>`;
+  result.innerHTML += `Aktuelle Stimmung des Teilnehmers Nr. ${results.length} = ${average}<br>`;
 
 // nach 20 Eingaben werden die Einträge gelöscht
   form.reset();
@@ -78,7 +78,13 @@ Der JSON-String wird in der Variablen jsonData gespeichert.*/
 
 
   const a = document.createElement('a');
+<<<<<<< HEAD
   //neues Element wird erstellt und in a gespeichert.
+=======
+  a.href = url;
+  a.download = 'stimmung.json';
+  a.click();
+>>>>>>> a7f98472041d3310c9739cb334d3085d358f67a9
 
   a.href = url;
   a.download = 'Ergebnisse.json';
