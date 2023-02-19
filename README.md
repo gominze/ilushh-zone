@@ -7,7 +7,7 @@ Grober Aufbau / coden vom Stimmungsindex.
 https://codepen.io/ilushh/pen/ZEjZBxe
 
 >19.02.2023
-Code oebn nicht aktuell. 
+Code oben nicht aktuell. 
 
 https://github.com/ilushh/Stimmungsindex/tree/master/StimmungsNdx
 
