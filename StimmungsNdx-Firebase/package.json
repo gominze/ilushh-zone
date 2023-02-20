@@ -12,6 +12,9 @@
     "vite": "^4.1.0"
   },
   "dependencies": {
-    "firebase": "^9.17.1"
+    "audit": "^0.0.6",
+    "firebase": "^9.17.1",
+    "fix": "^0.0.6",
+    "npm": "^9.5.0"
   }
 }
