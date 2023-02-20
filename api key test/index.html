@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-database.js"></script>
+  </head>
+  <body>
+    <h1>1 nicer wert bestimmen</h1>
+    <input
+      type="range"
+      min="1"
+      max="10"
+      value="5"
+      class="slider"
+      id="myRange"
+    />
+    <p>Wert: <span id="sliderValue"></span></p>
+    <button onclick="saveSliderValue()">Speichern</button>
+  </body>
+  <script src="script.js"></script>
+</html>

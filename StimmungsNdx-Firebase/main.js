@@ -22,6 +22,20 @@ import {
 } from "firebase/firestore";
 import "./style.css";
 
+// http test
+
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  // handle requests
+});
+
+server.listen(8000, () => {
+  console.log("Server listening on port 8000");
+});
+
+// http test ende
+
 const firebaseConfig = {
   apiKey: "AIzaSyBRgqLBodBJg4KwkGpjRIJ_7mpe0wvuL50",
   authDomain: "stimmungsndx.firebaseapp.com",
