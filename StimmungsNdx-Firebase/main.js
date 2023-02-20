@@ -27,7 +27,7 @@ const db = getFirestore();
 document.getElementById("go").addEventListener("click", () => {
   alert("Ihre Stimmungseingaben werden an den Server gesendet")
   const docRef = addDoc(collection(db,"User"), {
-    Text: document.getElementById("input").value
+    Number: document.getElementById("input").value
   })
 })
 // import javascriptLogo from './javascript.svg'
@@ -98,7 +98,7 @@ const average = (question1 + question2 + question3 + question4 + question5) / 5;
 // Durchschnittsbewertung jedes Benutzers als Teil der Gesamtbewertungen in einem Ergebnisfeld angezeigt.
 const container = document.createElement('div');
 container.className = 'centered'; // um mit CSS arbeiten zu können bezogen auf Teilnehmer
-container.innerHTML = `Teilnehmer ${results.length}: ${average}<br>`;
+container.innerHTML = `Eintrag ${results.length}: ${average}<br>`;
 
 document.body.appendChild(container);
 
