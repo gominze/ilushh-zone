@@ -2,9 +2,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { addDoc, collection } from "firebase/firestore";
+
 
 //dieser import ist vom random programm nicht 
-import { onSnapshot, getDoc, getDocFromCache, doc, getFirestore, addDoc, DocumentSnapshot, Firestore, DocumentReference, updateDoc, setDoc, getDocs, collection, documentId } from "firebase/firestore";
+import { onSnapshot, getDoc, getDocFromCache, doc, getFirestore, DocumentSnapshot, Firestore, DocumentReference, updateDoc, setDoc, getDocs, documentId } from "firebase/firestore";
 import './style.css'
 
 const firebaseConfig = {
@@ -27,9 +29,10 @@ const db = getFirestore();
 document.getElementById("go").addEventListener("click", () => {
   alert("Ihre Stimmungseingaben werden an den Server gesendet")
   const docRef = addDoc(collection(db,"User"), {
-    Number: document.getElementById("input").value
+    Text: document.getElementById("input").value
   })
 })
+
 // import javascriptLogo from './javascript.svg'
 // import { setupCounter } from './counter.js'
 
@@ -63,8 +66,8 @@ const form = document.querySelector("#survey-form");
 const sliders = form.querySelectorAll(".slider");
 const result = document.querySelector("#result"); // Für einzelne Teilnehmer
 
-const results = [];
-
+let sum = 0; // Summe der Bewertungen
+let count = 0; // Anzahl der Bewertungen
 
 /*Code snippet hat die Aufgabe für jedes Input-Element in der in der Variable "sliders" 
 gespeicherten Liste von HTML-Elementen, einen Event-Listener zu registrieren, 
@@ -82,37 +85,40 @@ sliders.forEach(slider => {
 form.addEventListener("submit", event => {
   event.preventDefault();
 
-// Durchschnitt der 5 Fragen
-const question1 = parseInt(document.querySelector("#question1").value, 10);
-const question2 = parseInt(document.querySelector("#question2").value, 10);
-const question3 = parseInt(document.querySelector("#question3").value, 10);
-const question4 = parseInt(document.querySelector("#question4").value, 10);
-const question5 = parseInt(document.querySelector("#question5").value, 10);
+  // Durchschnitt der 5 Fragen
+  const question1 = parseInt(document.querySelector("#question1").value, 10);
+  const question2 = parseInt(document.querySelector("#question2").value, 10);
+  const question3 = parseInt(document.querySelector("#question3").value, 10);
+  const question4 = parseInt(document.querySelector("#question4").value, 10);
+  const question5 = parseInt(document.querySelector("#question5").value, 10);
 
-const average = (question1 + question2 + question3 + question4 + question5) / 5;
-
-// fügt den durchschnittlichen Stimmungsindex des aktuellen Formulars in das results-Array ein
-  results.push(average);
+  const average = (question1 + question2 + question3 + question4 + question5) / 5;
 
 
-// Durchschnittsbewertung jedes Benutzers als Teil der Gesamtbewertungen in einem Ergebnisfeld angezeigt.
-const container = document.createElement('div');
-container.className = 'centered'; // um mit CSS arbeiten zu können bezogen auf Teilnehmer
-container.innerHTML = `Eintrag ${results.length}: ${average}<br>`;
+  // fügt den durchschnittlichen Stimmungsindex des aktuellen Formulars in das results-Array ein
+  sum += average;
+  count++;
+  const overallAverage = sum / count;
+  
 
-document.body.appendChild(container);
+  // Durchschnittsbewertung jedes Benutzers als Teil der Gesamtbewertungen in einem Ergebnisfeld angezeigt.
+  const container = document.createElement('div');
+  container.className = 'centered'; // um mit CSS arbeiten zu können bezogen auf Teilnehmer
+  container.innerHTML = `Teilnehmer ${count}: ${average}<br>`;
+  document.body.appendChild(container);
 
+  result.textContent = overallAverage.toFixed(2); // Anzeige des Durchschnittswerts mit 2 Dezimalstellen
 
-// nach 20 Eingaben werden die Einträge gelöscht
+  // Füge den durchschnittlichen Stimmungsindex in Firebase hinzu
+  addDoc(collection(db, "Umfrageergebnisse"), { durchschnittlicherStimmungsindex: overallAverage })
+    .then(() => {
+      console.log("Durchschnittlicher Stimmungsindex in Firebase hinzugefügt");
+    })
+    .catch((error) => {
+      console.error("Fehler beim Hinzufügen des durchschnittlichen Stimmungsindexes in Firebase: ", error);
+    });
+
   form.reset();
-
-
-// wenn 20 Stimmen abgegeben sind wird der Stimungsindex ausgerechnet.
-  if (results.length === 20) {
-    // kalkulieren
-    const overallAverage = results.reduce((sum, result) => sum + result, 0) / results.length;
-    result.innerHTML += `Der durchschnittliche Stimmungsindex aller Teilnehmer beträgt: ${overallAverage}`;
-  }
 });
 
 /* --------------erstellt dieser eine Schaltfläche, 

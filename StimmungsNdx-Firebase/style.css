@@ -90,3 +90,9 @@ result-page h2 {
   font-weight: bold;
 }
 
+#umfrageergebnisse {
+  border: 2px solid #FFD700; /* setzt eine goldene Umrandung */
+  border-radius: 10px; /* setzt abgerundete Ecken */
+  padding: 10px; /* gibt dem Kästchen einen Abstand vom Text */
+  box-shadow: 0px 0px 10px #FFD700; /* gibt dem Kästchen einen leuchtenden Effekt */
+}
