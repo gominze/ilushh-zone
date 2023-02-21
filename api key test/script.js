@@ -1,17 +1,19 @@
 // Konfiguration für Firebase
-var firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  databaseURL: "YOUR_DATABASE_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID",
+const firebaseConfig = {
+  apiKey: "AIzaSyBRgqLBodBJg4KwkGpjRIJ_7mpe0wvuL50",
+  authDomain: "stimmungsndx.firebaseapp.com",
+  projectId: "stimmungsndx",
+  storageBucket: "stimmungsndx.appspot.com",
+  messagingSenderId: "435372091585",
+  appId: "1:435372091585:web:1283bf0a6213b26133cc40",
+  measurementId: "G-GTBBJ107V5",
 };
-// init
-firebase.initializeApp(firebaseConfig);
-// Rreferenz zur firebase datenbank
-var database = firebase.database();
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+const db = getFirestore();
 
 // save value
 function saveSliderValue() {
