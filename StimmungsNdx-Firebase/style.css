@@ -1,4 +1,3 @@
-/* Styling für das Formular */
 
 h1 {
   text-align: center;
@@ -40,8 +39,7 @@ margin-top: 30px; /* legt den Abstand des Elements zum oberen Rand fest */
 letter-spacing: 3px;
 overflow: hidden;
 transition: .5s;
-display: block; /*Diese Eigenschaft legt die Art und Weise fest, wie das Element dargestellt wird. Hier ist die Einstellung auf "block" gesetzt, was bedeutet, dass das Element eine eigene 
-Zeile einnimmt und die gesamte verfügbare Breite ausfüllt.*/
+display: block; /* bedeutet, dass das Element eine eigene Zeile einnimmt und die gesamte verfügbare Breite ausfüllt.*/
 width: 160px; /* Breite des Buttons definieren */
 margin: 0 auto; /* Horizontale Ausrichtung auf dem Bildschirm */
 text-align: center; /* Text innerhalb des Buttons zentrieren */
@@ -91,8 +89,9 @@ result-page h2 {
 }
 
 #umfrageergebnisse {
-  border: 2px solid #FFD700; /* setzt eine goldene Umrandung */
-  border-radius: 10px; /* setzt abgerundete Ecken */
-  padding: 10px; /* gibt dem Kästchen einen Abstand vom Text */
-  box-shadow: 0px 0px 10px #FFD700; /* gibt dem Kästchen einen leuchtenden Effekt */
-}
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px #FFD700;
+  display: inline-block;
+  }

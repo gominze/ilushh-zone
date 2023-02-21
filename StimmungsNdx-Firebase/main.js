@@ -25,36 +25,6 @@ const analytics = getAnalytics(app);
 
 const db = getFirestore();
 
-//function  für Textfeld 1
-document.getElementById("go").addEventListener("click", () => {
-  alert("Ihre Stimmungseingaben werden an den Server gesendet")
-  const docRef = addDoc(collection(db,"User"), {
-    Text: document.getElementById("input").value
-  })
-})
-
-// import javascriptLogo from './javascript.svg'
-// import { setupCounter } from './counter.js'
-
-// document.querySelector('#app').innerHTML = `
-//   <div>
-//     <a href="https://vitejs.dev" target="_blank">
-//       <img src="/vite.svg" class="logo" alt="Vite logo" />
-//     </a>
-//     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-//       <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-//     </a>
-//     <h1>Hello Vite!</h1>
-//     <div class="card">
-//       <button id="counter" type="button"></button>
-//     </div>
-//     <p class="read-the-docs">
-//       Click on the Vite logo to learn more
-//     </p>
-//   </div>
-// `
-
-// setupCounter(document.querySelector('#counter'))
 
 
 /* Speichern
@@ -126,7 +96,7 @@ die es dem Benutzer ermöglicht, eine Datei mit Umfrageergebnissen
 im JSON-Format herunterzuladen.-----------------*/
 
 
-
+//---------------------------------------------------------------------------------
 function downloadResults() {
   const jsonData = JSON.stringify(results);
 /*Die Funktion ruft JSON.stringify(results) auf, 
@@ -161,3 +131,27 @@ downloadButton.addEventListener('click', downloadResults);
 
 // fügen Sie die Schaltfläche zur Seite hinzu
 document.body.appendChild(downloadButton);
+
+
+//----------------------------------------------------------------------------------
+// Abfragen der Daten aus Firebase
+getDocs(collection(db, "Umfrageergebnisse"))
+  .then((querySnapshot) => {
+    const data = [];
+    querySnapshot.forEach((doc) => {
+      data.push(doc.data());
+    });
+
+    // Umwandeln der Daten in JSON
+    const jsonData = JSON.stringify(data);
+
+    // Erstellen eines Download-Links
+    const downloadLink = document.createElement('a');
+    downloadLink.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonData);
+    downloadLink.download = 'umfrageergebnisse.json';
+    downloadLink.innerHTML = 'Download JSON';
+    document.body.appendChild(downloadLink);
+  })
+  .catch((error) => {
+    console.error("Fehler beim Abrufen der Daten aus Firebase: ", error);
+  });
