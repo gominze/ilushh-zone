@@ -26,7 +26,6 @@ const analytics = getAnalytics(app);
 const db = getFirestore();
 
 
-
 /* Speichern
 "form" wurde auf HTML zuvor definiert
 "querySelectorAll" gibt eine Liste von Elementen  zurück was auf CSS sich bezieht
@@ -79,6 +78,7 @@ form.addEventListener("submit", event => {
 
   result.textContent = overallAverage.toFixed(2); // Anzeige des Durchschnittswerts mit 2 Dezimalstellen
 
+
   // Füge den durchschnittlichen Stimmungsindex in Firebase hinzu
   addDoc(collection(db, "Umfrageergebnisse"), { durchschnittlicherStimmungsindex: overallAverage })
     .then(() => {
@@ -91,50 +91,50 @@ form.addEventListener("submit", event => {
   form.reset();
 });
 
+
 /* --------------erstellt dieser eine Schaltfläche, 
 die es dem Benutzer ermöglicht, eine Datei mit Umfrageergebnissen 
 im JSON-Format herunterzuladen.-----------------*/
 
-
-//---------------------------------------------------------------------------------
-function downloadResults() {
-  const jsonData = JSON.stringify(results);
-/*Die Funktion ruft JSON.stringify(results) auf, 
-um die Daten in der Variablen results in einen JSON-String umzuwandeln. 
-Der JSON-String wird in der Variablen jsonData gespeichert.*/
-
-
-  const blob = new Blob([jsonData], { type: 'application/json' });
-  /*Dann wird ein neues Blob-Objekt erstellt, indem der JSON-String jsonData als Daten verwendet wird. 
-  Die Option {type: 'application/json'} gibt an, dass es sich bei den Daten im Blob um JSON-Daten handelt. 
-  Das Blob-Objekt wird in der Variablen blob gespeichert.*/
-
-  const url = URL.createObjectURL(blob);
-  /*Die Funktion erstellt eine temporäre URL für das Blob-Objekt blob mit der Methode URL.createObjectURL(blob). 
-  URL wird in der Variablen url gespeichert.*/
+// //---------------------------------------------------------------------------------
+// function downloadResults() {
+//   const jsonData = JSON.stringify(results);
+// /*Die Funktion ruft JSON.stringify(results) auf, 
+// um die Daten in der Variablen results in einen JSON-String umzuwandeln. 
+// Der JSON-String wird in der Variablen jsonData gespeichert.*/
 
 
-  const a = document.createElement('a');
-  //neues Element wird erstellt und in a gespeichert.
+//   const blob = new Blob([jsonData], { type: 'application/json' });
+//   /*Dann wird ein neues Blob-Objekt erstellt, indem der JSON-String jsonData als Daten verwendet wird. 
+//   Die Option {type: 'application/json'} gibt an, dass es sich bei den Daten im Blob um JSON-Daten handelt. 
+//   Das Blob-Objekt wird in der Variablen blob gespeichert.*/
+
+//   const url = URL.createObjectURL(blob);
+//   /*Die Funktion erstellt eine temporäre URL für das Blob-Objekt blob mit der Methode URL.createObjectURL(blob). 
+//   URL wird in der Variablen url gespeichert.*/
+
+
+//   const a = document.createElement('a');
+//   //neues Element wird erstellt und in a gespeichert.
   
-  a.href = url;
-  a.download = 'Ergebnisse.json';
-  a.click();
+//   a.href = url;
+//   a.download = 'Ergebnisse.json';
+//   a.click();
 
-  URL.revokeObjectURL(url); // Blob-Objekt wird Freigegeben und damit die verbundene Speicherung freigesetzt
-}
+//   URL.revokeObjectURL(url); // Blob-Objekt wird Freigegeben und damit die verbundene Speicherung freigesetzt
+// }
 
-/* erstellt einen Button zum Download */
-const downloadButton = document.createElement('button');
-downloadButton.textContent = 'Download Ergebnis';
-downloadButton.addEventListener('click', downloadResults);
+// /* erstellt einen Button zum Download */
+// const downloadButton = document.createElement('button');
+// downloadButton.textContent = 'Download Ergebnis';
+// downloadButton.addEventListener('click', downloadResults);
 
-// fügen Sie die Schaltfläche zur Seite hinzu
-document.body.appendChild(downloadButton);
+// // fügen Sie die Schaltfläche zur Seite hinzu
+// document.body.appendChild(downloadButton);
 
 
-//----------------------------------------------------------------------------------
-// Abfragen der Daten aus Firebase
+// //----------------------------------------------------------------------------------
+// // Abfragen der Daten aus Firebase
 getDocs(collection(db, "Umfrageergebnisse"))
   .then((querySnapshot) => {
     const data = [];
