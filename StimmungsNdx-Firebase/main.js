@@ -1,13 +1,35 @@
-//einfach eingesetzt was auf firebase war
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { addDoc, collection } from "firebase/firestore";
+/*
+ _______  ___  ______    _______  _______  _______  _______  _______ 
+|       ||   ||    _ |  |       ||  _    ||   _   ||       ||       |
+|    ___||   ||   | ||  |    ___|| |_|   ||  |_|  ||  _____||    ___|
+|   |___ |   ||   |_||_ |   |___ |       ||       || |_____ |   |___ 
+|    ___||   ||    __  ||    ___||  _   | |       ||_____  ||    ___|
+|   |    |   ||   |  | ||   |___ | |_|   ||   _   | _____| ||   |___ 
+|___|    |___||___|  |_||_______||_______||__| |__||_______||_______|
+
+ */
+// 1) Import von Firebase (Vorgabe).
+
+import { initializeApp } from "firebase/app"; //Firebase-APP initialisieren und konfigurieren.
+import { getAnalytics } from "firebase/analytics"; //Firebase Analytics-Dienst für die aktuelle App-Instanz zu initialisieren.
+import { addDoc, collection } from "firebase/firestore"; /*erstellt neues Dokument in der Firestore-Sammlung.; 
+die andere Funktion erstellt eine Referent zum Dokument.*/
 
 
-//dieser import ist vom random programm nicht 
-import { onSnapshot, getDoc, getDocFromCache, doc, getFirestore, DocumentSnapshot, Firestore, DocumentReference, updateDoc, setDoc, getDocs, documentId } from "firebase/firestore";
+// Code importiert Vielzahl von Funktionen und Objekten aus dem Firebase-Store.
+
+import { onSnapshot, getDoc, getDocFromCache, doc, getFirestore, DocumentSnapshot, Firestore, DocumentReference, updateDoc, setDoc, getDocs, documentId }
+  from "firebase/firestore";
+
+
+
+// Styles werden importiert die im gleichen Verzeichnis wie die aktuelle JavaScript-Datei liegen sollte.
+
 import './style.css'
+
+
+
+// 2) Hier wird ein Objekt definiert, das die Konfigurationsoptionen für eine Firebase-App enthält.
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRgqLBodBJg4KwkGpjRIJ_7mpe0wvuL50",
@@ -19,42 +41,55 @@ const firebaseConfig = {
   measurementId: "G-GTBBJ107V5"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// 3) Initialize Firebase Daten speichern und abrufen.
 
+const app = initializeApp(firebaseConfig); // eine Verbindung zur Firebase-Plattform.
+const analytics = getAnalytics(app); //Google Analytics-Integration für die Firebase-App zu aktivieren.
 const db = getFirestore();
 
 
-/* Speichern
-"form" wurde auf HTML zuvor definiert
-"querySelectorAll" gibt eine Liste von Elementen  zurück was auf CSS sich bezieht
-".slider" ist der CSS-Selektor, der Elemente auswählt, die die Klasse "slider" haben.*/
+/*
+__   __  __   __  _______  ______    _______  _______  _______ 
+|  | |  ||  |_|  ||       ||    _ |  |   _   ||       ||       |
+|  | |  ||       ||    ___||   | ||  |  |_|  ||    ___||    ___|
+|  |_|  ||       ||   |___ |   |_||_ |       ||   | __ |   |___ 
+|       ||       ||    ___||    __  ||       ||   ||  ||    ___|
+|       || ||_|| ||   |    |   |  | ||   _   ||   |_| ||   |___ 
+|_______||_|   |_||___|    |___|  |_||__| |__||_______||_______|
 
-const form = document.querySelector("#survey-form");
-const sliders = form.querySelectorAll(".slider");
-const result = document.querySelector("#result"); // Für einzelne Teilnehmer
+  4) Der Code erstellt eine Umfrageform, in der jeder in der jeder Teilnehmer fünf Fragen beantwortet, indem er Schieberegler bewegt.*/
 
-let sum = 0; // Summe der Bewertungen
-let count = 0; // Anzahl der Bewertungen
+const form = document.querySelector("#survey-form"); // "form" auf HTML zuvor definiert; gibt eine Liste von Elementen zurück.
+const sliders = form.querySelectorAll(".slider"); //  .slider" ist der CSS-Selektor, der Elemente auswählt, die die Klasse "slider" haben.
+const result = document.querySelector("#result"); // Für einzelne Teilnehmer.
 
-/*Code snippet hat die Aufgabe für jedes Input-Element in der in der Variable "sliders" 
-gespeicherten Liste von HTML-Elementen, einen Event-Listener zu registrieren, 
-der auf das "input"-Event reagiert.*/
+
+
+let sum = 0; // Summe der Bewertungen.
+let count = 0; // Anzahl der Bewertungen.
+
+
+
+// Der Code fügt für jedes Slider-Element in der Liste "sliders" einen Event-Listener hinzu, der auf Eingaben reagiert.
 
 sliders.forEach(slider => {
-  slider.addEventListener("input", function() {
+  slider.addEventListener("input", function () {
     const id = this.id;
     const valueDisplay = document.querySelector(`#${id}-value`);
     valueDisplay.textContent = this.value;
   });
 });
 
-// Wenn das Formular gesendet wird, wird eine Funktion ausgeführt, die den Wert des Formulars berechnet.
+
+
+  // Wenn das Formular gesendet wird, wird eine Funktion ausgeführt, die den Wert des Formulars berechnet.
+
 form.addEventListener("submit", event => {
   event.preventDefault();
 
-  // Durchschnitt der 5 Fragen
+
+  // Durchschnitt der 5 Fragen.
+
   const question1 = parseInt(document.querySelector("#question1").value, 10);
   const question2 = parseInt(document.querySelector("#question2").value, 10);
   const question3 = parseInt(document.querySelector("#question3").value, 10);
@@ -64,22 +99,28 @@ form.addEventListener("submit", event => {
   const average = (question1 + question2 + question3 + question4 + question5) / 5;
 
 
-  // fügt den durchschnittlichen Stimmungsindex des aktuellen Formulars in das results-Array ein
+
+  // Fügt den durchschnittlichen Stimmungsindex des aktuellen Formulars in das results-Array ein.
+
   sum += average;
   count++;
   const overallAverage = sum / count;
-  
+
+
 
   // Durchschnittsbewertung jedes Benutzers als Teil der Gesamtbewertungen in einem Ergebnisfeld angezeigt.
+
   const container = document.createElement('div');
-  container.className = 'centered'; // um mit CSS arbeiten zu können bezogen auf Teilnehmer
+  container.className = 'centered'; // um mit CSS arbeiten zu können bezogen auf Teilnehmer.
   container.innerHTML = `Teilnehmer ${count}: ${average}<br>`;
   document.body.appendChild(container);
 
-  result.textContent = overallAverage.toFixed(2); // Anzeige des Durchschnittswerts mit 2 Dezimalstellen
+  result.textContent = overallAverage.toFixed(2); // Anzeige des Durchschnittswerts mit 2 Dezimalstellen.
 
 
-  // Füge den durchschnittlichen Stimmungsindex in Firebase hinzu
+
+  // Füge den durchschnittlichen Stimmungsindex in Firebase hinzu.
+
   addDoc(collection(db, "Umfrageergebnisse"), { durchschnittlicherStimmungsindex: overallAverage })
     .then(() => {
       console.log("Durchschnittlicher Stimmungsindex in Firebase hinzugefügt");
@@ -92,49 +133,9 @@ form.addEventListener("submit", event => {
 });
 
 
-/* --------------erstellt dieser eine Schaltfläche, 
-die es dem Benutzer ermöglicht, eine Datei mit Umfrageergebnissen 
-im JSON-Format herunterzuladen.-----------------*/
 
-// //---------------------------------------------------------------------------------
-// function downloadResults() {
-//   const jsonData = JSON.stringify(results);
-// /*Die Funktion ruft JSON.stringify(results) auf, 
-// um die Daten in der Variablen results in einen JSON-String umzuwandeln. 
-// Der JSON-String wird in der Variablen jsonData gespeichert.*/
+// Abfragen der Daten aus Firebase.
 
-
-//   const blob = new Blob([jsonData], { type: 'application/json' });
-//   /*Dann wird ein neues Blob-Objekt erstellt, indem der JSON-String jsonData als Daten verwendet wird. 
-//   Die Option {type: 'application/json'} gibt an, dass es sich bei den Daten im Blob um JSON-Daten handelt. 
-//   Das Blob-Objekt wird in der Variablen blob gespeichert.*/
-
-//   const url = URL.createObjectURL(blob);
-//   /*Die Funktion erstellt eine temporäre URL für das Blob-Objekt blob mit der Methode URL.createObjectURL(blob). 
-//   URL wird in der Variablen url gespeichert.*/
-
-
-//   const a = document.createElement('a');
-//   //neues Element wird erstellt und in a gespeichert.
-  
-//   a.href = url;
-//   a.download = 'Ergebnisse.json';
-//   a.click();
-
-//   URL.revokeObjectURL(url); // Blob-Objekt wird Freigegeben und damit die verbundene Speicherung freigesetzt
-// }
-
-// /* erstellt einen Button zum Download */
-// const downloadButton = document.createElement('button');
-// downloadButton.textContent = 'Download Ergebnis';
-// downloadButton.addEventListener('click', downloadResults);
-
-// // fügen Sie die Schaltfläche zur Seite hinzu
-// document.body.appendChild(downloadButton);
-
-
-// //----------------------------------------------------------------------------------
-// // Abfragen der Daten aus Firebase
 getDocs(collection(db, "Umfrageergebnisse"))
   .then((querySnapshot) => {
     const data = [];
@@ -142,10 +143,27 @@ getDocs(collection(db, "Umfrageergebnisse"))
       data.push(doc.data());
     });
 
-    // Umwandeln der Daten in JSON
+
+
+    
+    /*       ___  _______  _______  __    _ 
+            |   ||       ||       ||  |  | |
+            |   ||  _____||   _   ||   |_| |
+            |   || |_____ |  | |  ||       |
+         ___|   ||_____  ||  |_|  ||  _    |
+        |       | _____| ||       || | |   |
+        |_______||_______||_______||_|  |__|
+        */
+
+
+    // 5) Umwandeln der Daten in JSON.
+
     const jsonData = JSON.stringify(data);
 
-    // Erstellen eines Download-Links
+
+
+    // Erstellen eines Download-Links.
+
     const downloadLink = document.createElement('a');
     downloadLink.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(jsonData);
     downloadLink.download = 'umfrageergebnisse.json';
