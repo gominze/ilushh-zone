@@ -174,7 +174,9 @@ getDocs(collection(db, "Umfrageergebnisse"))
     console.error("Fehler beim Abrufen der Daten aus Firebase: ", error);
   });
 
-  //Test Datenabrufen
+
+//Test Datenabrufen
+//noch im "aufbau"
 // Erstellen Sie eine Referenz auf Ihre Firestore-Sammlung
 var collectionRef = firebase.firestore().collection('User');
 
