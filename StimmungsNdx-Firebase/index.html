@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Firebase App einbinden -->
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+  <!-- Database einbinden) -->
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+  <script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyBRgqLBodBJg4KwkGpjRIJ_7mpe0wvuL50",
+    authDomain: "stimmungsndx.firebaseapp.com",
+    projectId: "stimmungsndx",
+    storageBucket: "stimmungsndx.appspot.com",
+    messagingSenderId: "435372091585",
+    appId: "1:435372091585:web:1283bf0a6213b26133cc40",
+    measurementId: "G-GTBBJ107V5"
+    };
+    // Init Firebase
+    firebase.initializeApp(firebaseConfig);
+    </script>
+
     <meta charset="UTF-8">
     <link rel="icon" type="image/svg+xml" href="/Minzeblatt_SVG.svg">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,6 +73,11 @@
         <h2 id="result"></h2>
       </div>
       <div id="result"></div>
+
+      
+  <!-- Hier wird der Durchscnittswert der aktuellen Stimmung angezeigt (von Firebase)-->
+  <p id="durchscnittsergebnis"></p>
+
         
             
 <!-- 

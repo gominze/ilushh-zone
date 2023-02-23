@@ -173,3 +173,24 @@ getDocs(collection(db, "Umfrageergebnisse"))
   .catch((error) => {
     console.error("Fehler beim Abrufen der Daten aus Firebase: ", error);
   });
+
+  //Test Datenabrufen
+// Erstellen Sie eine Referenz auf Ihre Firestore-Sammlung
+var collectionRef = firebase.firestore().collection('User');
+
+// Abrufen der Daten
+collectionRef.get().then(function(querySnapshot) {
+    // Speichert die Summe aller eingegebenen Werte und die Anzahl der Einträge
+    var sum = 0;
+    var count = querySnapshot.size;
+    querySnapshot.forEach(function(doc) {
+        sum += doc.data().Stimmung;
+    });
+    
+    // Berechnet Stimmungsindexdurchschnitt (Summe durch AnzahlEintrag)
+    var average = sum / count;
+    
+    // Anzeigen lassen in der HTML-Datei
+    var averageDisplay = document.getElementById("durchscnittsergebnis");
+    averageDisplay.innerHTML = "Der Stimmungsdurchschnitt beträgt aktuell " + average.toFixed(2);
+});
